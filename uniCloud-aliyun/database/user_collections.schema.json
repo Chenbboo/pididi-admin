@@ -1,0 +1,16 @@
+{
+  "bsonType": "object",
+  "required": ["user_openid", "article_id"],
+  "permission": {
+    "read": "'user_openid' == auth.uid",
+    "create": "'user_openid' == auth.uid",
+    "update": "'user_openid' == auth.uid",
+    "delete": "'user_openid' == auth.uid"
+  },
+  "properties": {
+    "_id": { "bsonType": "string" },
+    "user_openid": { "bsonType": "string", "title": "用户openid" },
+    "article_id": { "bsonType": "string", "title": "文章ID" },
+    "create_time": { "bsonType": "timestamp", "title": "收藏时间" }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "bsonType": "object",
+  "required": ["title", "category", "content"],
+  "permission": {
+    "read": true,
+    "create": "'uni-id-users' in auth.getAuthenticatedUser().role",
+    "update": "'uni-id-users' in auth.getAuthenticatedUser().role",
+    "delete": "'uni-id-users' in auth.getAuthenticatedUser().role"
+  },
+  "properties": {
+    "_id": { "bsonType": "string" },
+    "title": { "bsonType": "string", "title": "标题", "trim": "both" },
+    "category": {
+      "bsonType": "string",
+      "title": "分类",
+      "enum": [
+        { "value": "destination", "text": "目的地攻略" },
+        { "value": "theme", "text": "主题玩法" },
+        { "value": "itinerary", "text": "行程规划" },
+        { "value": "travel", "text": "出行攻略" },
+        { "value": "pitfall", "text": "避坑指南" },
+        { "value": "culture", "text": "本地文化" }
+      ]
+    },
+    "destination_id": { "bsonType": "string", "title": "关联目的地" },
+    "cover_image": { "bsonType": "string", "title": "封面图", "trim": "both" },
+    "summary": { "bsonType": "string", "title": "摘要", "maxLength": 200 },
+    "content": { "bsonType": "string", "title": "正文（富文本HTML）" },
+    "tags": { "bsonType": "array", "title": "标签", "items": { "bsonType": "string" } },
+    "view_count": { "bsonType": "int", "title": "浏览量", "defaultValue": 0 },
+    "collect_count": { "bsonType": "int", "title": "收藏数", "defaultValue": 0 },
+    "status": {
+      "bsonType": "string",
+      "title": "状态",
+      "enum": ["draft", "published"],
+      "defaultValue": "draft"
+    },
+    "create_time": { "bsonType": "timestamp", "title": "创建时间" },
+    "update_time": { "bsonType": "timestamp", "title": "更新时间" }
+  }
+}

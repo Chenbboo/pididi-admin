@@ -1,0 +1,31 @@
+{
+  "bsonType": "object",
+  "required": ["name", "region"],
+  "permission": {
+    "read": true,
+    "create": "'uni-id-users' in auth.getAuthenticatedUser().role",
+    "update": "'uni-id-users' in auth.getAuthenticatedUser().role",
+    "delete": "'uni-id-users' in auth.getAuthenticatedUser().role"
+  },
+  "properties": {
+    "_id": { "bsonType": "string" },
+    "name": { "bsonType": "string", "title": "目的地名称", "trim": "both" },
+    "name_en": { "bsonType": "string", "title": "英文名", "trim": "both" },
+    "region": {
+      "bsonType": "string",
+      "title": "区域",
+      "enum": ["北部", "中部", "南部"]
+    },
+    "cover_image": { "bsonType": "string", "title": "封面图", "trim": "both" },
+    "description": { "bsonType": "string", "title": "简介", "maxLength": 500 },
+    "best_season": { "bsonType": "string", "title": "最佳季节" },
+    "sort_order": { "bsonType": "int", "title": "排序", "defaultValue": 0 },
+    "status": {
+      "bsonType": "string",
+      "title": "状态",
+      "enum": ["active", "inactive"],
+      "defaultValue": "active"
+    },
+    "create_time": { "bsonType": "timestamp", "title": "创建时间" }
+  }
+}

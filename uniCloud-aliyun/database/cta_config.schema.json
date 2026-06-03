@@ -1,0 +1,24 @@
+{
+  "bsonType": "object",
+  "required": ["position"],
+  "permission": {
+    "read": true,
+    "create": "'uni-id-users' in auth.getAuthenticatedUser().role",
+    "update": "'uni-id-users' in auth.getAuthenticatedUser().role",
+    "delete": "'uni-id-users' in auth.getAuthenticatedUser().role"
+  },
+  "properties": {
+    "_id": { "bsonType": "string" },
+    "position": {
+      "bsonType": "string",
+      "title": "触点位置",
+      "enum": ["A", "B", "C", "D"]
+    },
+    "article_id": { "bsonType": "string", "title": "关联文章ID（A/B/D可选）" },
+    "qr_code_url": { "bsonType": "string", "title": "企微活码图片URL" },
+    "text": { "bsonType": "string", "title": "引导文案" },
+    "trigger_seconds": { "bsonType": "int", "title": "触发秒数（D弹窗用）", "defaultValue": 15 },
+    "trigger_scroll_percent": { "bsonType": "int", "title": "触发滚动百分比（D弹窗用）", "defaultValue": 60 },
+    "is_active": { "bsonType": "bool", "title": "是否启用", "defaultValue": true }
+  }
+}
