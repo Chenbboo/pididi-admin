@@ -2,6 +2,16 @@
 const db = uniCloud.database()
 const cmd = db.command
 
+// 字段名归一化：兼容 admin 和 miniapp 不同的字段名
+function normalize(a) {
+  return {
+    ...a,
+    cover: a.cover || a.cover_image || '',
+    views: a.views || a.view_count || 0,
+    collects: a.collects || a.collect_count || 0,
+  }
+}
+
 module.exports = {
   _before: function () {
     // clientInfo 包含平台、设备信息
@@ -89,7 +99,7 @@ module.exports = {
         .orderBy(orderBy)
         .skip(skip)
         .limit(pageSize)
-        .field('_id,title,category,cover,summary,views,collects,publish_date')
+        .field('_id,title,category,cover,cover_image,summary,views,view_count,collects,collect_count,publish_date')
         .get(),
       db.collection('articles')
         .where(where)
@@ -97,7 +107,7 @@ module.exports = {
     ])
 
     return {
-      list: listResult.data,
+      list: listResult.data.map(normalize),
       total: countResult.total,
       page,
       pageSize,
@@ -139,10 +149,10 @@ module.exports = {
       .where({ status: 'published' })
       .orderBy({ views: 'desc' })
       .limit(limit)
-      .field('_id,title,category,cover,summary,views,collects,publish_date')
+      .field('_id,title,category,cover,cover_image,summary,views,view_count,collects,collect_count,publish_date')
       .get()
 
-    return result.data
+    return result.data.map(normalize)
   },
 
   /**
@@ -164,9 +174,9 @@ module.exports = {
       .orderBy({ publish_date: 'desc' })
       .skip(skip)
       .limit(pageSize)
-      .field('_id,title,category,cover,summary,views,collects,publish_date')
+      .field('_id,title,category,cover,cover_image,summary,views,view_count,collects,collect_count,publish_date')
       .get()
 
-    return { list: result.data, keyword }
+    return { list: result.data.map(normalize), keyword }
   }
 }

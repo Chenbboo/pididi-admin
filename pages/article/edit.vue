@@ -74,7 +74,7 @@ export default {
         cover_image: '',
         summary: '',
         content: '',
-        status: 'draft',
+        status: 'published',
       },
       categories: ['目的地攻略', '主题玩法', '行程规划', '出行攻略', '避坑指南', '本地文化'],
       destinations: [],

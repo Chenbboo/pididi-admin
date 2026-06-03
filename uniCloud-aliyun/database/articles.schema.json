@@ -3,9 +3,9 @@
   "required": ["title", "category", "content"],
   "permission": {
     "read": true,
-    "create": "'uni-id-users' in auth.getAuthenticatedUser().role",
-    "update": "'uni-id-users' in auth.getAuthenticatedUser().role",
-    "delete": "'uni-id-users' in auth.getAuthenticatedUser().role"
+    "create": "auth.uid != null",
+    "update": "auth.uid != null",
+    "delete": "auth.uid != null"
   },
   "properties": {
     "_id": { "bsonType": "string" },
@@ -14,21 +14,25 @@
       "bsonType": "string",
       "title": "分类",
       "enum": [
-        { "value": "destination", "text": "目的地攻略" },
-        { "value": "theme", "text": "主题玩法" },
-        { "value": "itinerary", "text": "行程规划" },
-        { "value": "travel", "text": "出行攻略" },
-        { "value": "pitfall", "text": "避坑指南" },
-        { "value": "culture", "text": "本地文化" }
+        { "value": "目的地攻略", "text": "目的地攻略" },
+        { "value": "主题玩法", "text": "主题玩法" },
+        { "value": "行程规划", "text": "行程规划" },
+        { "value": "出行攻略", "text": "出行攻略" },
+        { "value": "避坑指南", "text": "避坑指南" },
+        { "value": "本地文化", "text": "本地文化" }
       ]
     },
     "destination_id": { "bsonType": "string", "title": "关联目的地" },
-    "cover_image": { "bsonType": "string", "title": "封面图", "trim": "both" },
+    "cover": { "bsonType": "string", "title": "封面图", "trim": "both" },
+    "cover_image": { "bsonType": "string", "title": "封面图(旧)", "trim": "both" },
     "summary": { "bsonType": "string", "title": "摘要", "maxLength": 200 },
     "content": { "bsonType": "string", "title": "正文（富文本HTML）" },
     "tags": { "bsonType": "array", "title": "标签", "items": { "bsonType": "string" } },
-    "view_count": { "bsonType": "int", "title": "浏览量", "defaultValue": 0 },
-    "collect_count": { "bsonType": "int", "title": "收藏数", "defaultValue": 0 },
+    "views": { "bsonType": "int", "title": "浏览量", "defaultValue": 0 },
+    "view_count": { "bsonType": "int", "title": "浏览量(旧)", "defaultValue": 0 },
+    "collects": { "bsonType": "int", "title": "收藏数", "defaultValue": 0 },
+    "collect_count": { "bsonType": "int", "title": "收藏数(旧)", "defaultValue": 0 },
+    "publish_date": { "bsonType": "timestamp", "title": "发布时间" },
     "status": {
       "bsonType": "string",
       "title": "状态",

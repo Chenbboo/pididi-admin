@@ -11,6 +11,10 @@
     {
       "path": "uni_modules/uni-id-pages/pages/login/login-withpwd",
       "style": { "topWindow": false, "leftWindow": false, "navigationBarTitleText": "登录" }
+    },
+    {
+      "path": "uni_modules/uni-id-pages/pages/register/register-admin",
+      "style": { "navigationBarTitleText": "注册管理员" }
     }
   ],
   "globalStyle": {

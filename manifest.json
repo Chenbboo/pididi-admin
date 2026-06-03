@@ -86,7 +86,15 @@
     "vueVersion" : "3",
     "uniCloud": {
         "provider": "aliyun",
-        "spaceId": "mp-1d2de47f-aa8c-41d0-8cbc-f88bb18923ad"
+        "spaceId": "mp-1d2de47f-aa8c-41d0-8cbc-f88bb18923ad",
+        "clientSecret": "MmBX5nRa3yBziaje1cKdlw==",
+        "endpoint": "https://api.next.bspapp.com",
+        "spaces": [{
+            "spaceid": "mp-1d2de47f-aa8c-41d0-8cbc-f88bb18923ad",
+            "name": "pididi",
+            "clientSecret": "MmBX5nRa3yBziaje1cKdlw==",
+            "apiEndpoint": "https://api.next.bspapp.com"
+        }]
     },
     "networkTimeout" : {
         "uploadFile" : 1200000 //ms， 如果不配置，上传大文件可能会超时

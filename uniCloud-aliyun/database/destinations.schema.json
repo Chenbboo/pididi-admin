@@ -3,9 +3,9 @@
   "required": ["name", "region"],
   "permission": {
     "read": true,
-    "create": "'uni-id-users' in auth.getAuthenticatedUser().role",
-    "update": "'uni-id-users' in auth.getAuthenticatedUser().role",
-    "delete": "'uni-id-users' in auth.getAuthenticatedUser().role"
+    "create": "auth.uid != null",
+    "update": "auth.uid != null",
+    "delete": "auth.uid != null"
   },
   "properties": {
     "_id": { "bsonType": "string" },

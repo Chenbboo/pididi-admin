@@ -1,6 +1,6 @@
 export default {
   login: {
-    url: '' // 暂时关闭登录，直接进入管理页面
+    url: '/pages/article/list' // 跳过登录，直入攻略管理
   },
   index: {
     url: '/pages/article/list' // 登录后默认进入攻略管理

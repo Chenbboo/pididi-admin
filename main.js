@@ -3,6 +3,13 @@ import store from './store'
 import plugin from './js_sdk/uni-admin/plugin'
 import messages from './i18n/index.js'
 
+// 显式初始化 uniCloud 空间连接
+uniCloud.init({
+  provider: 'aliyun',
+  spaceId: 'mp-1d2de47f-aa8c-41d0-8cbc-f88bb18923ad',
+  clientSecret: 'MmBX5nRa3yBziaje1cKdlw=='
+})
+
 const lang = uni.getLocale()
 // #ifndef VUE3
 import Vue from 'vue'
