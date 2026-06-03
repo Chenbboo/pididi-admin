@@ -3,6 +3,7 @@
     <view class="header">
       <text class="title">CTA 触点配置</text>
       <text class="desc">四个转化入口的二维码和文案管理</text>
+      <button type="primary" size="mini" @click="goCreate">新建CTA</button>
     </view>
 
     <view v-if="loading" class="loading">加载中...</view>
@@ -17,6 +18,9 @@
         <view class="card-pos-label">{{ positionLabel(item.position) }}</view>
         <image v-if="item.qr_code_url" :src="item.qr_code_url" class="qr-preview" mode="aspectFit" />
         <view v-else class="qr-empty">未上传二维码</view>
+        <view class="card-actions" style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;">
+          <button size="mini" @click.stop="doDelete(item._id)" type="warn">删除</button>
+        </view>
       </view>
     </view>
   </view>
@@ -47,8 +51,19 @@ export default {
       }
       this.loading = false
     },
+    goCreate() {
+      uni.navigateTo({ url: '/pages/cta/edit' })
+    },
     goEdit(id) {
       uni.navigateTo({ url: `/pages/cta/edit?id=${id}` })
+    },
+    async doDelete(id) {
+      const { confirm } = await uni.showModal({ title: '确认删除', content: '删除后不可恢复' })
+      if (confirm) {
+        await db.collection('cta_config').doc(id).remove()
+        uni.showToast({ title: '已删除', icon: 'success' })
+        this.fetchList()
+      }
     },
   },
 }

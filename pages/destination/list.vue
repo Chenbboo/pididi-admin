@@ -3,6 +3,7 @@
     <view class="header">
       <text class="title">目的地管理</text>
       <button type="primary" size="mini" @click="goCreate">新建目的地</button>
+      <button size="mini" @click="seedDestinations">初始化8个目的地</button>
     </view>
 
     <view v-if="loading" class="loading">加载中...</view>
@@ -16,6 +17,7 @@
           <text class="card-desc">{{ item.description }}</text>
           <view class="card-actions">
             <button size="mini" @click="goEdit(item._id)">编辑</button>
+            <button size="mini" type="warn" @click="doDelete(item._id)">删除</button>
           </view>
         </view>
       </view>
@@ -36,7 +38,7 @@ export default {
   methods: {
     async fetchList() {
       this.loading = true
-      const res = await db.collection('destinations').orderBy('sort_order', 'asc').get()
+      const res = await db.collection('destinations').orderBy('sort', 'asc').get()
       this.list = res.result.data || []
       this.loading = false
     },
@@ -45,6 +47,19 @@ export default {
     },
     goEdit(id) {
       uni.navigateTo({ url: `/pages/destination/edit?id=${id}` })
+    },
+    async doDelete(id) {
+      const { confirm } = await uni.showModal({ title: '确认删除', content: '删除后不可恢复' })
+      if (confirm) {
+        await db.collection('destinations').doc(id).remove()
+        uni.showToast({ title: '已删除', icon: 'success' })
+        this.fetchList()
+      }
+    },
+    async seedDestinations() {
+      const res = await uniCloud.importObject('destination').seed()
+      uni.showToast({ title: res.ok ? `已添加${res.count}个` : res.msg, icon: 'success' })
+      this.fetchList()
     },
   },
 }

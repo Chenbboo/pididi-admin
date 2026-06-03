@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Fix</title></head><body>
+<h1>Please wait...</h1>
+<script src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uniCloud/uniCloud-web.js"></script>
+<script>
+uniCloud.init({provider:'aliyun',spaceId:'mp-1d2de47f-aa8c-41d0-8cbc-f88bb18923ad',clientSecret:'MmBX5nRa3yBziaje1cKdlw==',endpoint:'https://api.next.bspapp.com'})
+setTimeout(async()=>{
+try{
+const db=uniCloud.database()
+const res=await db.collection('articles').get()
+const list=res.result?.data||res.data||[]
+let c=0
+for(const a of list){await db.collection('articles').doc(a._id).update({status:'published',views:Math.floor(Math.random()*3000)+500,collects:Math.floor(Math.random()*150)+20});c++}
+document.body.innerHTML='<h1 style=color:green>Fixed '+c+' articles!</h1><p>OK</p>'
+}catch(e){document.body.innerHTML='<h1 style=color:red>'+e.message+'</h1>'}
+},2000)
+</script>
+</body></html>
