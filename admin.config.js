@@ -1,6 +1,6 @@
 export default {
   login: {
-    url: '/uni_modules/uni-id-pages/pages/login/login-withpwd'
+    url: '' // 暂时关闭登录，直接进入管理页面
   },
   index: {
     url: '/pages/article/list' // 登录后默认进入攻略管理
